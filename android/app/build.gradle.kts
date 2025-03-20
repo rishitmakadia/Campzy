@@ -3,7 +3,8 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
-    id ("com.google.gms.google-services")
+    // id ("com.google.gms.google-services") //Milan
+    id("com.google.gms.google-services") apply false
     // id("com.google.gms.google-services") version "4.3.15" apply false
 
 }
@@ -31,6 +32,7 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        multiDexEnabled = true
     }
         
     buildTypes {
@@ -42,6 +44,33 @@ android {
     }
 }
 
+dependencies {
+  // Import the Firebase BoM
+//   implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
+
+
+  // TODO: Add the dependencies for Firebase products you want to use
+  // When using the BoM, don't specify versions in Firebase dependencies
+//   implementation("com.google.firebase:firebase-analytics")
+//    classpath("com.google.gms:google-services:4.3.15")
+
+  // Add the dependencies for any other desired Firebase products
+  // https://firebase.google.com/docs/android/setup#available-libraries
+
+  // Import the Firebase BoM (Bill of Materials)
+    implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
+
+    // Firebase Core services
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-storage")
+    
+    // MultiDex support (if needed)
+    implementation("androidx.multidex:multidex:2.0.1")
+}
+
 flutter {
     source = "../.."
 }
+// apply(plugin = "com.google.gms.google-services")

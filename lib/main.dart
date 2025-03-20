@@ -1,14 +1,33 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mad_4/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'auth/services/auth_service.dart';
 import 'package:mad_4/providers/post_provider.dart';
 import 'package:mad_4/providers/theme_provider.dart';
 import 'package:mad_4/core/splash_screen.dart';
+// import 'firebase_options.dart';
+
 
 void main() async {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
+  // runApp(
+  //   MultiProvider(
+  //     providers: [
+  //       Provider(create: (context) => AuthService()),
+  //       ChangeNotifierProvider(create: (context) => PostProvider()),
+  //       ChangeNotifierProvider(create: (context) => ThemeProvider()),
+  //     ],
+  //     child: const MyApp(),
+  //   ),
+  // );
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform, // Use FirebaseOptions for Web compatibility
+  );
+
   runApp(
     MultiProvider(
       providers: [
